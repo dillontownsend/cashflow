@@ -8,4 +8,9 @@ public class IndexModel : PageModel
     public void OnGet()
     {
     }
+
+    public IActionResult OnGetMobileMenu()
+    {
+        return Partial("_IndexMobileMenu");
+    }
 }
