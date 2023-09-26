@@ -11,6 +11,6 @@ public class IndexModel : PageModel
 
     public IActionResult OnGetMobileMenu()
     {
-        return Partial("_IndexMobileMenu");
+        return Partial("_MobileMenu");
     }
 }
