@@ -1,0 +1,79 @@
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+@model CashFlow.Pages.Account.Register
+
+<form class="space-y-6" hx-post="@Url.Page("Register")" hx-swap="outerHTML">
+    @Html.AntiForgeryToken()
+    <div>
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        @if (ViewData.ModelState["Email"] != null && ViewData.ModelState["Email"]!.Errors.Any())
+        {
+            <div class="relative mt-2 rounded-md shadow-sm">
+                <input asp-for="Email" id="email" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6" placeholder="you@example.com" aria-invalid="true" aria-describedby="email-error">
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            <span asp-validation-for="Email" class="mt-2 text-sm text-red-600" id="email-error"></span>
+        }
+        else
+        {
+            <div class="mt-2">
+                <input asp-for="Email" id="email" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6" placeholder="you@example.com">
+            </div>
+        }
+    </div>
+
+    <div>
+        <div class="flex items-center justify-between">
+            <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+        </div>
+        @if (ViewData.ModelState["Password"] != null && ViewData.ModelState["Password"]!.Errors.Any())
+        {
+            <div class="relative mt-2 rounded-md shadow-sm">
+                <input asp-for="Password" id="password" type="password" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6" placeholder="you@example.com" aria-invalid="true" aria-describedby="email-error">
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            <span asp-validation-for="Password" class="mt-2 text-sm text-red-600" id="password-error"></span>
+        }
+        else
+        {
+            <div class="mt-2">
+                <input asp-for="Password" id="password" type="password" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6">
+            </div>
+        }
+    </div>
+
+    <div>
+        <div class="flex items-center justify-between">
+            <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+        </div>
+        @if (ViewData.ModelState["ConfirmPassword"] != null && ViewData.ModelState["ConfirmPassword"]!.Errors.Any())
+        {
+            <div class="relative mt-2 rounded-md shadow-sm">
+                <input asp-for="ConfirmPassword" id="confirmPassword" type="password" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 pr-10 text-red-900 ring-1 ring-inset ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6" placeholder="you@example.com" aria-invalid="true" aria-describedby="email-error">
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-5a.75.75 0 01.75.75v4.5a.75.75 0 01-1.5 0v-4.5A.75.75 0 0110 5zm0 10a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="mt-2 text-sm text-red-600" id="confirm-password-error"></span>
+        }
+        else
+        {
+            <div class="mt-2">
+                <input asp-for="ConfirmPassword" id="confirmPassword" type="password" autocomplete="off" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-600 sm:text-sm sm:leading-6">
+            </div>
+        }
+    </div>
+
+    <div>
+        <button type="submit" class="flex w-full justify-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">Register</button>
+    </div>
+</form>
