@@ -19,7 +19,7 @@ public class Register : PageModel
     [EmailAddress, Required] public string Email { get; set; } = "";
     [Required] public string Password { get; set; } = "";
 
-    [Required, Compare(nameof(Password), ErrorMessage = "Passwords did not match")]
+    [Required, Compare(nameof(Password), ErrorMessage = "Passwords did not match.")]
     public string ConfirmPassword { get; set; } = "";
 
     public void OnGet()
