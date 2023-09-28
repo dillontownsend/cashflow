@@ -1,8 +1,17 @@
-@using Microsoft.AspNetCore.Mvc.ModelBinding
 @model CashFlow.Pages.Account.Register
 
 <form class="space-y-6" hx-post="@Url.Page("Register")" hx-swap="outerHTML">
     @Html.AntiForgeryToken()
+    @if (ViewData.ModelState["Identity"] != null)
+    {
+        <ul class="list-disc">
+            @foreach (var identityError in ViewData.ModelState["Identity"]!.Errors)
+            {
+                <li class="mt-2 text-sm text-red-600">@identityError.ErrorMessage</li>
+            }
+        </ul>
+    }
+
     <div>
         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
         @if (ViewData.ModelState["Email"] != null && ViewData.ModelState["Email"]!.Errors.Any())

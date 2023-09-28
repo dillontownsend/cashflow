@@ -1,5 +1,6 @@
 using CashFlow.Persistence;
 using CashFlow.Persistence.Models;
+using CashFlow.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<AccountService>();
 
 var app = builder.Build();
 
