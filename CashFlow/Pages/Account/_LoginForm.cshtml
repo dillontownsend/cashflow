@@ -1,7 +1,9 @@
 @model CashFlow.Pages.Account.Login
 
-<form class="space-y-6" hx-post="@Url.Page("Login")" hx-swap="outerHTML">
+<form class="space-y-6" hx-post="@Url.Page("Login")" hx-swap="outerHTML" hx-params="*">
     @Html.AntiForgeryToken()
+    <input asp-for="ReturnUrl" type="hidden">
+
     @if (ViewData.ModelState["Identity"] != null)
     {
         <ul class="list-disc">

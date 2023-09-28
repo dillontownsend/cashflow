@@ -19,8 +19,14 @@ public class Login : PageModel
     [EmailAddress, Required] public string Email { get; set; } = "";
     [Required] public string Password { get; set; } = "";
 
+    [BindProperty(SupportsGet = true)] public string? ReturnUrl { get; set; }
+
     public void OnGet()
     {
+        if (HttpContext.Request.Query.TryGetValue("ReturnUrl", out var returnUrl))
+        {
+            ReturnUrl = returnUrl.ToString();
+        }
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -35,7 +41,11 @@ public class Login : PageModel
             return Partial("_LoginForm");
         }
 
-        Response.Headers.Add("HX-Location", HttpContext.Request.GetBaseUrl());
+        var redirectUrl = ReturnUrl != null
+            ? $"{HttpContext.Request.GetBaseUrl()}{ReturnUrl}"
+            : $"{HttpContext.Request.GetBaseUrl()}/App";
+
+        Response.Headers.Add("HX-Location", redirectUrl);
         return new EmptyResult();
     }
 }
