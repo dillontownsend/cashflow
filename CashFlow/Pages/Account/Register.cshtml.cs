@@ -22,8 +22,14 @@ public class Register : PageModel
     [Required, Compare(nameof(Password), ErrorMessage = "Passwords did not match.")]
     public string ConfirmPassword { get; set; } = "";
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
+        if (User.Identity != null && User.Identity.IsAuthenticated)
+        {
+            return RedirectToPage("/App/Index");
+        }
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -38,10 +44,14 @@ public class Register : PageModel
             {
                 ModelState.AddModelError("Identity", identityError.Description);
             }
+
             return Partial("_RegisterForm");
         }
 
-        Response.Headers.Add("HX-Location", HttpContext.Request.GetBaseUrl());
+        await _accountService.LoginAsync(Email, Password);
+
+        var redirectUrl = $"{HttpContext.Request.GetBaseUrl()}/App";
+        Response.Headers.Add("HX-Location", redirectUrl);
         return new EmptyResult();
     }
 }

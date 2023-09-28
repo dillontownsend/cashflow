@@ -21,12 +21,17 @@ public class Login : PageModel
 
     [BindProperty(SupportsGet = true)] public string? ReturnUrl { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGet()
     {
-        if (HttpContext.Request.Query.TryGetValue("ReturnUrl", out var returnUrl))
+        if (User.Identity != null && User.Identity.IsAuthenticated)
         {
-            ReturnUrl = returnUrl.ToString();
+            return RedirectToPage("/App/Index");
         }
+
+        if (HttpContext.Request.Query.TryGetValue("ReturnUrl", out var returnUrl))
+            ReturnUrl = returnUrl.ToString();
+
+        return Page();
     }
 
     public async Task<IActionResult> OnPostAsync()

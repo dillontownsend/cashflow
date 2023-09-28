@@ -1,6 +1,6 @@
 @model CashFlow.Pages.Account.Login
 
-<form class="space-y-6" hx-post="@Url.Page("Login")" hx-swap="outerHTML" hx-params="*">
+<form class="space-y-6" hx-post="@Url.Page("Login")" hx-swap="outerHTML">
     @Html.AntiForgeryToken()
     <input asp-for="ReturnUrl" type="hidden">
 
