@@ -1,5 +1,11 @@
 @model CashFlow.Pages.Account.Register
 
+<style>
+    form.htmx-request {
+        opacity:  0.5;
+    }
+</style>
+
 <form class="space-y-6" hx-post="@Url.Page("Register")" hx-swap="outerHTML">
     @Html.AntiForgeryToken()
     @if (ViewData.ModelState["Identity"] != null)

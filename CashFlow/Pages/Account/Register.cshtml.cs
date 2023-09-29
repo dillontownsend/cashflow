@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using CashFlow.Extensions;
 using CashFlow.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CashFlow.Pages.Account;
 
-[BindProperties]
+[AllowAnonymous, BindProperties]
 public class Register : PageModel
 {
     private readonly AccountService _accountService;
