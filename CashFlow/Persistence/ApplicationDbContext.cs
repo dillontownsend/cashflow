@@ -6,6 +6,12 @@ namespace CashFlow.Persistence;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<UserBudgetProfile> UserBudgetProfiles { get; set; }
+    public DbSet<AssetAccount> AssetAccounts { get; set; }
+    public DbSet<CreditCardAccount> CreditCardAccounts { get; set; }
+    public DbSet<DebtAccount> DebtAccounts { get; set; }
+    public DbSet<PrimaryEnvelope> PrimaryEnvelopes { get; set; }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
     }
