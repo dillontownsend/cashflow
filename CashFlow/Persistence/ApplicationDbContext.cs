@@ -11,6 +11,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<CreditCardAccount> CreditCardAccounts { get; set; }
     public DbSet<DebtAccount> DebtAccounts { get; set; }
     public DbSet<PrimaryEnvelope> PrimaryEnvelopes { get; set; }
+    public DbSet<DebtEnvelope> DebtEnvelopes { get; set; }
+    public DbSet<GoalEnvelope> GoalEnvelopes { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {

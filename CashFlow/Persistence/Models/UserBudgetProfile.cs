@@ -10,4 +10,6 @@ public class UserBudgetProfile : Model
     public ICollection<CreditCardAccount> CreditCardAccounts { get; set; } = new List<CreditCardAccount>();
     public ICollection<DebtAccount> DebtAccounts { get; set; } = new List<DebtAccount>();
     public ICollection<PrimaryEnvelope> PrimaryEnvelopes { get; set; } = new List<PrimaryEnvelope>();
+    public ICollection<DebtEnvelope> DebtEnvelopes { get; set; } = new List<DebtEnvelope>();
+    public ICollection<GoalEnvelope> GoalEnvelopes { get; set; } = new List<GoalEnvelope>();
 }
