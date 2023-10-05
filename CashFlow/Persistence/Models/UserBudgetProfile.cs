@@ -4,12 +4,9 @@ public class UserBudgetProfile : Model
 {
     public int Id { get; set; }
     public int BudgetStartDayOfMonth { get; set; }
+
     public Guid ApplicationUserId { get; set; }
     public ApplicationUser ApplicationUser { get; set; } = null!;
-    public ICollection<AssetAccount> AssetAccounts { get; set; } = new List<AssetAccount>();
-    public ICollection<CreditCardAccount> CreditCardAccounts { get; set; } = new List<CreditCardAccount>();
-    public ICollection<DebtAccount> DebtAccounts { get; set; } = new List<DebtAccount>();
-    public ICollection<PrimaryEnvelope> PrimaryEnvelopes { get; set; } = new List<PrimaryEnvelope>();
-    public ICollection<DebtEnvelope> DebtEnvelopes { get; set; } = new List<DebtEnvelope>();
-    public ICollection<GoalEnvelope> GoalEnvelopes { get; set; } = new List<GoalEnvelope>();
+    public ICollection<Account> Accounts { get; set; } = new List<Account>();
+    public ICollection<Envelope> Envelopes { get; set; } = new List<Envelope>();
 }
