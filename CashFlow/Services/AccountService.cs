@@ -29,4 +29,10 @@ public class AccountService
     {
         return await _signInManager.PasswordSignInAsync(email, password, isPersistent: true, lockoutOnFailure: false);
     }
+
+    public async Task<ApplicationUser> GetApplicationUserByEmailAsync(string applicationUserEmail)
+    {
+        return await _userManager.FindByEmailAsync(applicationUserEmail) ??
+               throw new Exception($"User with id '{applicationUserEmail}' does not exist");
+    }
 }

@@ -1,5 +1,6 @@
 using CashFlow.Persistence;
 using CashFlow.Persistence.Models;
+using CashFlow.Persistence.Repositories;
 using CashFlow.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +23,9 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 });
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<UserBudgetProfileRepository>();
+builder.Services.AddScoped<UserBudgetProfileService>();
+builder.Services.AddScoped<UnitOfWork>();
 
 var app = builder.Build();
 

@@ -11,10 +11,12 @@ namespace CashFlow.Pages.Account;
 public class Register : PageModel
 {
     private readonly AccountService _accountService;
+    private readonly UserBudgetProfileService _userBudgetProfileService;
 
-    public Register(AccountService accountService)
+    public Register(AccountService accountService, UserBudgetProfileService userBudgetProfileService)
     {
         _accountService = accountService;
+        _userBudgetProfileService = userBudgetProfileService;
     }
 
     [EmailAddress, Required] public string Email { get; set; } = "";
@@ -49,7 +51,11 @@ public class Register : PageModel
             return Partial("_RegisterForm");
         }
 
-        await _accountService.LoginAsync(Email, Password);
+        var applicationUser = await _accountService.GetApplicationUserByEmailAsync(Email);
+
+        await Task.WhenAll(
+            _accountService.LoginAsync(Email, Password),
+            _userBudgetProfileService.CreateUserBudgetProfileAsync(applicationUser));
 
         var redirectUrl = $"{HttpContext.Request.GetBaseUrl()}/App";
         Response.Headers.Add("HX-Location", redirectUrl);

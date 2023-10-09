@@ -28,11 +28,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         foreach (var entityEntry in entries)
         {
-            ((Model)entityEntry.Entity).UpdatedAt = DateTime.Now;
+            ((Model)entityEntry.Entity).UpdatedAt = DateTime.UtcNow;
 
             if (entityEntry.State == EntityState.Added)
             {
-                ((Model)entityEntry.Entity).CreatedAt = DateTime.Now;
+                ((Model)entityEntry.Entity).CreatedAt = DateTime.UtcNow;
             }
         }
 
@@ -49,11 +49,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
         foreach (var entityEntry in entries)
         {
-            ((Model)entityEntry.Entity).UpdatedAt = DateTime.Now;
+            ((Model)entityEntry.Entity).UpdatedAt = DateTime.UtcNow;
 
             if (entityEntry.State == EntityState.Added)
             {
-                ((Model)entityEntry.Entity).CreatedAt = DateTime.Now;
+                ((Model)entityEntry.Entity).CreatedAt = DateTime.UtcNow;
             }
         }
 
