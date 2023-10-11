@@ -9,4 +9,5 @@ public class DebtAccount : Account
 
     public int DebtEnvelopeId { get; set; }
     public DebtEnvelope DebtEnvelope { get; set; } = null!;
+    public ICollection<DebtTransaction> DebtTransactions { get; set; } = null!;
 }

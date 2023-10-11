@@ -8,4 +8,6 @@ public class GoalEnvelope : Envelope
     public decimal Balance { get; set; }
     public GoalEnvelopeInterval GoalEnvelopeInterval { get; set; }
     public DateTime? DueDate { get; set; }
+
+    public ICollection<ExpenseOrCreditTransaction> ExpenseOrCreditTransactions { get; set; } = null!;
 }

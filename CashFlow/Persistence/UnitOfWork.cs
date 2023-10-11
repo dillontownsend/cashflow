@@ -5,7 +5,7 @@ namespace CashFlow.Persistence;
 public class UnitOfWork
 {
     private readonly ApplicationDbContext _applicationDbContext;
-    public UserBudgetProfileRepository UserBudgetProfileRepository { get; set; }
+    public UserBudgetProfileRepository UserBudgetProfileRepository { get; }
 
     public UnitOfWork(UserBudgetProfileRepository userBudgetProfileRepository,
         ApplicationDbContext applicationDbContext)

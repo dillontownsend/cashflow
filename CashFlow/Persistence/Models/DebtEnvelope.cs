@@ -4,6 +4,6 @@ public class DebtEnvelope : Envelope
 {
     public decimal MonthlyPayment { get; set; }
     public int? DueDayOfMonth { get; set; }
-    
-    public DebtAccount DebtAccount { get; set; }
+
+    public DebtAccount DebtAccount { get; set; } = null!;
 }

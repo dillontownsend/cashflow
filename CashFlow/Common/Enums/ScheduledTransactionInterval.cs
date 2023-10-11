@@ -2,6 +2,7 @@ namespace CashFlow.Common.Enums;
 
 public enum ScheduledTransactionInterval
 {
+    Once,
     Weekly,
     EveryTwoWeeks,
     EveryFourWeeks,
