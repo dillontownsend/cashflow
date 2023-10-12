@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true"/>
     <script src="~/lib/htmx/htmx.js" asp-append-version="true"></script>
-    <script src="~/lib/alpinejs/alpinejs.js" asp-append-version="true" defer></script>
 </head>
 <body hx-boost="true" class="h-full">
 
 @RenderBody()
 
 <script src="~/js/site.js" asp-append-version="true"></script>
-
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
