@@ -8,7 +8,7 @@
 <div class="bg-white flex flex-col items-center justify-between h-screen">
     <header class="w-full inset-x-0 top-0 z-50">
         <nav class="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
-            <a asp-page="/" class="flex gap-2 items-center w-fit">
+            <a asp-page="/Index" class="flex gap-2 items-center w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#059669" class="w-8 h-8">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
                 </svg>
@@ -42,7 +42,7 @@
             <div class="fixed inset-0 z-50" id="hideMenuButton"></div>
             <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div class="flex items-center justify-between">
-                    <a asp-page="/" class="-m-1.5 p-1.5">
+                    <a asp-page="/Index" class="-m-1.5 p-1.5">
                         <span class="text-2xl tracking-tight font-semibold">Cash<span class="text-emerald-600">Flow</span></span>
                     </a>
                     <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" id="menuOverlay">
@@ -55,7 +55,14 @@
                 <div class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-gray-500/10">
                         <div class="py-6">
-                            <a asp-page="/Account/Login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <a asp-page="/App/Index" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Open CashFlow</a>
+                            }
+                            else
+                            {
+                                <a asp-page="/Account/Login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</a>
+                            }
                         </div>
                     </div>
                 </div>
