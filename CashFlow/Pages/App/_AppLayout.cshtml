@@ -5,7 +5,7 @@
 
 <div class="min-h-full bg-gray-100">
     <div class="bg-emerald-600 pb-32">
-        <nav class="border-b border-emerald-300 border-opacity-25 bg-emerald-600 lg:border-none">
+        <nav class="border-b border-emerald-300 border-opacity-25 bg-emerald-600 lg:border-none" x-data="{ showMobileMenu: false }">
             <div class="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
                 <div class="relative flex h-16 items-center justify-between lg:border-b lg:border-emerald-400 lg:border-opacity-25">
                     <div class="flex items-center px-2 lg:px-0">
@@ -38,15 +38,15 @@
                     </div>
                     <div class="flex lg:hidden">
                         <!-- Mobile menu button -->
-                        <button id="mobileMenuButton" type="button" class="relative inline-flex items-center justify-center rounded-md bg-emerald-600 p-2 text-emerald-200 hover:bg-emerald-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600" aria-controls="mobile-menu" aria-expanded="false">
+                        <button x-on:click="showMobileMenu = !showMobileMenu" type="button" class="relative inline-flex items-center justify-center rounded-md bg-emerald-600 p-2 text-emerald-200 hover:bg-emerald-500 hover:bg-opacity-75 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600" aria-controls="mobile-menu" aria-expanded="false">
                             <span class="absolute -inset-0.5"></span>
                             <span class="sr-only">Open main menu</span>
                             <!-- Menu open: "hidden", Menu closed: "block" -->
-                            <svg id="kebab-icon" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <svg x-show="!showMobileMenu" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
                             </svg>
                             <!-- Menu open: "block", Menu closed: "hidden" -->
-                            <svg id="close-icon" class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <svg x-show="showMobileMenu" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
@@ -62,9 +62,9 @@
                             </button>
 
                             <!-- Profile dropdown -->
-                            <div class="relative ml-3 flex-shrink-0">
+                            <div class="relative ml-3 flex-shrink-0" x-data="{ showUserMenu: false }">
                                 <div>
-                                    <button type="button" class="relative flex rounded-full bg-emerald-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <button x-on:click="showUserMenu = true" type="button" class="relative flex rounded-full bg-emerald-600 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-emerald-600" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                                         <span class="absolute -inset-1.5"></span>
                                         <span class="sr-only">Open user menu</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-8 w-8 rounded-full">
@@ -83,7 +83,7 @@
                                 From: "transform opacity-100 scale-100"
                                 To: "transform opacity-0 scale-95"
                                 -->
-                                <div id="dropdownMenu" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1" x-show="showUserMenu" x-on:click.outside="showUserMenu = false">
                                     <!-- Active: "bg-gray-100", Not Active: "" -->
                                     <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
                                     <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
@@ -96,7 +96,7 @@
             </div>
 
             <!-- Mobile menu, show/hide based on menu state. -->
-            <div class="hidden" id="mobile-menu">
+            <div class="lg:hidden" id="mobile-menu" x-show="showMobileMenu">
                 <div class="space-y-1 px-2 pb-3 pt-2">
                     <!-- Current: "bg-emerald-700 text-white", Default: "text-white hover:bg-emerald-500 hover:bg-opacity-75" -->
                     <a asp-page="/App/Index" class="@(page == "/App/Index" ? "bg-emerald-700 text-white" : "text-white hover:bg-emerald-500 hover:bg-opacity-75") block rounded-md py-2 px-3 text-base font-medium" aria-current="page">Budget</a>
@@ -145,44 +145,3 @@
         </div>
     </main>
 </div>@RenderBody()
-
-@section Scripts
-{
-    <script type="text/javascript">
-        $(() => {
-            const dropdownMenu = $("#dropdownMenu");
-            const userMenuButton = $("#user-menu-button");
-            
-            const mobileMenu = $("#mobile-menu");
-            const mobileMenuButton = $("#mobileMenuButton");
-            const kebabIcon = $("#kebab-icon");
-            const closeIcon = $("#close-icon");
-            
-            userMenuButton.click(() => {
-                if (dropdownMenu.is(":hidden")) {
-                    dropdownMenu.show();
-                } else {
-                    dropdownMenu.hide();
-                }
-            });
-            
-            $(document).mouseup((event) => {
-                if (!dropdownMenu.is(event.target) && dropdownMenu.has(event.target).length === 0 && !userMenuButton.is(event.target) && !userMenuButton.has(event.target).length > 0 ) {
-                    dropdownMenu.hide();
-                }
-            });
-            
-            mobileMenuButton.click(() => {
-                if (mobileMenu.is(":hidden")) {
-                    mobileMenu.show();
-                    kebabIcon.hide();
-                    closeIcon.show();
-                } else {
-                    mobileMenu.hide();
-                    kebabIcon.show();
-                    closeIcon.hide();
-                }
-            });
-        });
-    </script>
-}

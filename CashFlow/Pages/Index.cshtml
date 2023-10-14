@@ -6,7 +6,7 @@
 }
 
 <div class="bg-white flex flex-col items-center justify-between h-screen">
-    <header class="w-full inset-x-0 top-0 z-50">
+    <header class="w-full inset-x-0 top-0 z-50" x-data="{ showSideMenu: false }">
         <nav class="flex items-center justify-between p-6 lg:px-8 max-w-7xl mx-auto" aria-label="Global">
             <a asp-page="/Index" class="flex gap-2 items-center w-fit">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#059669" class="w-8 h-8">
@@ -16,8 +16,8 @@
                     <span class="text-2xl tracking-tight font-bold">Cash<span class="text-emerald-600">Flow</span></span>
                 </div>
             </a>
-            <div class="flex lg:hidden">
-                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700" id="showMenuButton">
+            <div class="flex lg:hidden" x-on:click="showSideMenu = true">
+                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
                     <span class="sr-only">Open main menu</span>
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
@@ -38,14 +38,14 @@
             </div>
         </nav>
 
-        <div class="hidden" id="mobileMenu" role="dialog" aria-modal="true">
-            <div class="fixed inset-0 z-50" id="hideMenuButton"></div>
+        <div class="lg:hidden" role="dialog" aria-modal="true" x-show="showSideMenu">
+            <div class="fixed inset-0 z-50" x-on:click="showSideMenu = false"></div>
             <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                 <div class="flex items-center justify-between">
                     <a asp-page="/Index" class="-m-1.5 p-1.5">
                         <span class="text-2xl tracking-tight font-semibold">Cash<span class="text-emerald-600">Flow</span></span>
                     </a>
-                    <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" id="menuOverlay">
+                    <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" x-on:click="showSideMenu = false">
                         <span class="sr-only">Close menu</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -117,26 +117,3 @@
         </div>
     </footer>
 </div>
-
-@section Scripts {
-    <script type="text/javascript">
-        $(() => {
-            const showMenuButton = $("#showMenuButton");
-            const hideMenuButton = $("#hideMenuButton");
-            const menuOverlay = $("#menuOverlay");
-            const mobileMenu = $("#mobileMenu");
-            
-            showMenuButton.click(() => {
-                mobileMenu.show();
-            });
-            
-            hideMenuButton.click(() => {
-                mobileMenu.hide();
-            });
-            
-            menuOverlay.click(() => {
-                mobileMenu.hide();
-            });
-        });
-    </script>
-}
