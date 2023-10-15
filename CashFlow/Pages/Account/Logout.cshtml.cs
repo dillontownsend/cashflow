@@ -1,5 +1,4 @@
-using CashFlow.Persistence.Models;
-using Microsoft.AspNetCore.Identity;
+using CashFlow.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -7,16 +6,16 @@ namespace CashFlow.Pages.Account;
 
 public class Logout : PageModel
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly AccountService _accountService;
 
-    public Logout(SignInManager<ApplicationUser> signInManager)
+    public Logout(AccountService accountService)
     {
-        _signInManager = signInManager;
+        _accountService = accountService;
     }
 
     public async Task<IActionResult> OnGetAsync()
     {
-        await _signInManager.SignOutAsync();
+        await _accountService.SignOutAsync();
         return RedirectToPage("/Index");
     }
 }

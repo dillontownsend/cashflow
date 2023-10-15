@@ -35,4 +35,9 @@ public class AccountService
         return await _userManager.FindByEmailAsync(applicationUserEmail) ??
                throw new Exception($"User with id '{applicationUserEmail}' does not exist");
     }
+
+    public async Task SignOutAsync()
+    {
+        await _signInManager.SignOutAsync();
+    }
 }
